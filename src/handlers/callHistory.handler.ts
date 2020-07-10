@@ -99,7 +99,7 @@ callHistoryHandler.deleteCallHistory = async function (req: any, res: any, done:
   try {
     const data: any = {};
     // tslint:disable-next-line: no-shadowed-variable
-    const uuid = req.params.uuid;
+    const uuid = req.body.uuid;
     const callsCollection = await this.mongo.MONGO1.db.collection('calls');
     const result = await callHistoryModel.deleteCallHistory(uuid, callsCollection);
     if (result.deletedCount > 0) {

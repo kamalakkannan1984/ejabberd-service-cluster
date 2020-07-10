@@ -28,9 +28,6 @@ import { callHistoryHandlers } from '../handlers/callHistory.handler';
 import { ejabberdConfigHandlers } from '../handlers/ejabbredConfig.handler';
 import { ejabbredConfigSchema } from '../schema/ejabbredConfig.schema';
 
-import { pushNotificationHandlers } from '../handlers/pushNotification.handler';
-import { pushNotificationSchema } from '../schema/pushNotification.schema';
-
 import { chatHistoryHandlers } from '../handlers/chatHistory.handler';
 import { chatHistorySchema } from '../schema/chatHistory.schema';
 
@@ -56,7 +53,7 @@ export const configureRoutes = (fastify: any, options: any, done: any) => {
   fastify.get(
     '/api/status',
     {
-      preValidation: [fastify.validateSession],
+      //preValidation: [fastify.validateSession],
       schema: {
         description: 'Status api',
         tags: ['health'],
@@ -636,15 +633,15 @@ export const configureRoutes = (fastify: any, options: any, done: any) => {
     callHistoryHandlers.getCallHistory,
   );
 
-  fastify.delete(
-    '/api/call_history/:uuid',
+  fastify.post(
+    '/api/delete_call_history',
     {
       preValidation: [fastify.validateSession],
       schema: {
         description: 'Call history delete by uuid Api',
         tags: ['call'],
-        //body: callHistorySchema.updateCallHistroy.body,
-        params: callHistorySchema.deleteCallHistory.params,
+        body: callHistorySchema.deleteCallHistory.body,
+        //params: callHistorySchema.deleteCallHistory.params,
         // response: userSchema.createTeamRes
       },
     },
@@ -655,7 +652,7 @@ export const configureRoutes = (fastify: any, options: any, done: any) => {
   fastify.post(
     '/api/vhost',
     {
-      preValidation: [fastify.validateSession],
+      //preValidation: [fastify.validateSession],
       schema: {
         description: ' Virtual host add Api',
         tags: ['host'],

@@ -125,9 +125,10 @@ user.registerReq = {
     properties: {
       userid: { type: 'string' },
       password: { type: 'string' },
+      host: { type: 'string' },
       company_id: { type: 'number' },
     },
-    required: ['userid', 'password', 'company_id'],
+    required: ['userid', 'password', 'company_id', 'host'],
   },
 };
 

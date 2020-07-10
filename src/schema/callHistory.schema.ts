@@ -64,7 +64,7 @@ callHistory.getCallHistory = {
  * delete call history
  */
 callHistory.deleteCallHistory = {
-  params: {
+  body: {
     type: 'object',
     properties: {
       uuid: { type: 'string' },

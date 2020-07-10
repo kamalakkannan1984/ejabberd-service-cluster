@@ -6,12 +6,16 @@ import { config } from './config/app';
 import { utils } from './utils/utils';
 import { authHandler } from './handlers/auth.hanlder';
 import { configureRoutes } from './routes';
-
-// import * as db from './db/index';
-require('./db/index');
+import fs from 'fs';
+require('ssl-root-cas').inject();
 const server: fastify.FastifyInstance<Server, IncomingMessage, ServerResponse> = fastify({
   logger: true,
   trustProxy: true,
+  https: {
+    key: fs.readFileSync('/etc/pki/tls/certs/star.urchat.unifiedring.co.uk.key', 'utf8'),
+    cert: fs.readFileSync('/etc/pki/tls/certs/star.urchat.unifiedring.co.uk.crt', 'utf8'),
+  },
+  serverFactory: require('fastify-http2https')(),
 });
 
 server.register(require('fastify-swagger'), config.swagger_options);
